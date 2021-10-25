@@ -1,0 +1,13 @@
+---
+  - name: install pip library 
+    hosts: all
+    become: yes
+    become_method: sudo
+
+    tasks:
+     - name:
+       pip: name={{item}} state=present
+       with_items:
+       - enum34
+       - decorator
+
