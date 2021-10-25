@@ -1,0 +1,15 @@
+---
+  - name: Install openjdk
+    hosts: jenkinsagents
+    become: yes
+    become_method: sudo
+    
+    tasks:
+     - name: add openjdk repo
+       apt_repository: repo='ppa:openjdk-r/ppa' state=present update_cache=yes
+     - name: install openjdk-11
+       apt: name=openjdk-11-jdk state=present
+     - name: update default java
+       shell: update-java-alternatives -s /usr/lib/jvm/java-1.11.0-openjdk-amd64
+      
+       
