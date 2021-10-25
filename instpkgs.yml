@@ -1,0 +1,13 @@
+---
+  - hosts: all
+    become: yes
+    become_method: sudo
+    
+    tasks:
+    - name: Install package
+      apt: 
+       name: "{{ item }}" 
+       state: present
+      with_items: 
+       - makepasswd
+       - iptraf
