@@ -1,0 +1,30 @@
+---
+  - name: Post Docker installation
+    hosts: all
+    become: true
+    tasks:
+      - name: Create Docker service override dir
+        file: 
+          path: /etc/systemd/system/docker.service.d
+          state: directory
+
+      - name: Download Docker service
+        copy:
+          src: /home/it-admin/override.conf
+          dest: /etc/systemd/system/docker.service.d/override.conf
+
+      - name: Dowload Container DNS
+        copy:
+          src: /home/it-admin/daemon.json
+          dest: /etc/docker/daemon.json
+
+      - name: Reload systemD service
+        systemd:
+          daemon_reload: yes
+
+      - name: Reload docker service
+        systemd:
+          name: docker
+          state: restarted
+
+
