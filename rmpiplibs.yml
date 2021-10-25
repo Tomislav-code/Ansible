@@ -1,0 +1,13 @@
+---
+  - name: remove pip library 
+    hosts: jenkinsagents
+    become: yes
+    become_method: sudo
+
+    tasks:
+     - name:
+       pip: name={{item}} state=absent
+       with_items:
+       - enum
+       - enum34
+
