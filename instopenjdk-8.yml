@@ -1,0 +1,15 @@
+---
+  - name: Install openjdk
+    hosts: jenkinsmaster
+    become: yes
+    become_method: sudo
+    
+    tasks:
+     - name: add openjdk repo
+       apt_repository: repo='ppa:openjdk-r/ppa' state=present update_cache=yes
+     - name: install openjdk-8
+       apt: name=openjdk-8-jdk state=present
+     - name: update default jave
+       shell: update-java-alternatives -s /usr/lib/jvm/java-1.8.0-openjdk-amd64
+      
+       
