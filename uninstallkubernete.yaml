@@ -1,0 +1,14 @@
+---
+  - hosts: all
+    become: true
+    tasks:
+    - name: Remove kubernetes
+      apt: 
+        name: "{{ packages }}"
+        state: absent
+      vars:
+        packages:
+          - kubelet
+          - kubeadm
+          - kubectl
+ 
