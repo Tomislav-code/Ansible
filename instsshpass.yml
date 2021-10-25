@@ -1,0 +1,14 @@
+---
+  - hosts: all
+    become: yes
+    become_method: sudo
+
+    tasks:
+
+    - name: Install sshpass in Redhat derivatives
+      yum: name=sshpass state=present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install sshpass in Debian derivatives
+      apt: name=sshpass state=present
+      when: ansible_os_family == 'Debian'
