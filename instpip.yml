@@ -1,0 +1,14 @@
+---
+  - hosts: all
+    become: yes
+    become_method: sudo
+
+    tasks:
+
+    - name: Install Python in Redhat derivatives
+      yum: name=python-pip state=present
+      when: ansible_os_family == 'RedHat'
+
+    - name: Install python-pip in Debian derivatives
+      apt: name=python-pip state=present
+      when: ansible_os_family == 'Debian'
